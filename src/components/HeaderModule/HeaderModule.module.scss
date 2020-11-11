@@ -1,0 +1,162 @@
+@import '../../utils.scss';
+
+.burgerToggler {
+  height: 35px;
+  width: 35px;
+  position: fixed;
+  z-index: 4;
+  top: 40px;
+  right: 20px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background: $c-light-black;
+  cursor: pointer;
+  transition: 0.1s;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.burgerToggler__stripe {
+  display: block;
+  margin: 3px 0;
+  height: 3px;
+  width: 65%;
+  border-radius: 2px;
+  background: $c-white;
+  transform-origin: left;
+  transition: 0.3s;
+}
+
+.content {
+  transition: 0.7s;
+  position: fixed;
+  width: 100vw;
+  z-index: 3;
+  box-shadow: 0 0 2px $c-orange;
+}
+
+.darker {
+  @extend %darker;
+  background: $c-light-black;
+}
+
+.container {
+  @extend %container;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.logo {
+  @extend %logo;
+}
+
+.langSetter {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: bold;
+  color: $c-white;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    color: $c-orange;
+  }
+}
+
+.langSetter__option {
+  background: $c-light-black;
+}
+
+.navLink {
+  @extend %ifo-link;
+  font-size: 24px;
+  margin-left: 30px;
+}
+
+@media (max-width: 920px) {
+  .burgerToggler {
+    display: flex;
+  }
+
+  .content {
+    left: 100vw;
+    box-shadow: none;
+  }
+
+  .darker {
+    opacity: 1;
+  }
+
+  .container {
+    height: 100vh;
+    width: 100vw;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+
+  .logo {
+    margin-top: 30px;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .navLink {
+    font-size: 42px;
+    margin-left: 0;
+    margin-top: 30px;
+    transition-delay: 0.7s;
+    opacity: 0;
+  
+    &:nth-child(odd) {
+      transform: translateX(-200%);
+    }
+
+    &:nth-child(even) {
+      transform: translateX(200%);
+    }
+  }
+
+  .menuIsOpen {
+    overflow: hidden;
+    
+    .content {
+      transform: translateX(-100vw);
+    }
+
+    .navLink {
+      transform: none;
+      transition: 0.7s;
+      opacity: 1;
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          transition-delay: #{$i / 10}s;
+        }
+      }   
+    }
+  
+    .burgerToggler__stripe {
+      &:first-child {
+        transform: rotate(45deg) translateY(-6px) translateX(-1px);
+      }
+  
+      &:last-child {
+        transform: rotate(-45deg) translateY(4px) translateX(1px);
+      }
+    }
+  }
+}

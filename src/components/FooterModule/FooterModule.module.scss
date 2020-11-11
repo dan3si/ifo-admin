@@ -1,0 +1,10 @@
+@import '../../utils.scss';
+
+.footer {
+  height: 100vh;
+  background: url(../../images/footer_background.jpg) center no-repeat;
+  background-size: cover;
+  position: sticky;
+  bottom: 0;
+  z-index: -1;
+}
