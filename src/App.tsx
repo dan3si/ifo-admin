@@ -3,6 +3,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { AddEventsPage } from 'pages/AddEventsPage';
 import { RemoveEventsPage } from 'pages/RemoveEventsPage';
 import { MainPage } from 'pages/MainPage';
+import { SignInPage } from 'pages/SignInPage';
+import { AuthProvider } from 'global/AuthContext';
 
 function App() {
   return (
@@ -17,11 +19,14 @@ function App() {
         <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet" />
       </head>
 
-      <BrowserRouter>
-        <Route path="/" exact component={MainPage} />
-        <Route path="/addevents" exact component={AddEventsPage} />
-        <Route path="/removeevents" exact component={RemoveEventsPage} />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Route path="/" exact component={MainPage} />
+          <Route path="/addevents" exact component={AddEventsPage} />
+          <Route path="/removeevents" exact component={RemoveEventsPage} />
+          <Route path="/signin" exact component={SignInPage} />
+        </BrowserRouter>
+      </AuthProvider>
     </>
   );
 }

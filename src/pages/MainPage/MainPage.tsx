@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Header } from 'components/HeaderModule';
 import { Footer } from 'components/FooterModule';
+import { AuthContext } from 'global/AuthContext';
 
-export const MainPage = () => {
+export const MainPage = ({ history }: any) => {
+  const { checkAuth } = useContext(AuthContext);
+
+  checkAuth(history);
+
   return (
     <>
       <Header />

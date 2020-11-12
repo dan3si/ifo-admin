@@ -1,0 +1,39 @@
+@import "../../utils.scss";
+
+.signIn {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.darker {
+  @extend %darker;
+  background: $c-white;
+}
+
+.form {
+  position: relative;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  border-radius: 30px;
+  background: $c-light-black;
+}
+
+.heading {
+  @extend %heading;
+  color: $c-white;
+}
+
+.passwordInput {
+  @extend %inputBase;
+  width: 50%;
+}
+
+.submit {
+  @extend %ifo-button;
+  margin-top: 60px;
+}

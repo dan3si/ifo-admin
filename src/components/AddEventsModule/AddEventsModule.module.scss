@@ -34,21 +34,6 @@
   max-width: 400px;
 }
 
-%inputBase {
-  margin-top: 30px;
-  padding: 10px 0;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid $c-white;
-  outline: none;
-  color: $c-white;
-  transition: 0.3s;
-
-  &:focus {
-    border-color: $c-orange;
-  }
-}
-
 .inputString,
 .inputFile {
   @extend %inputBase;
@@ -71,20 +56,8 @@
 }
 
 .submit {
+  @extend %ifo-button;
   margin-top: 60px;
-  height: 55px;
-  width: 225px;
-  border-radius: 8px;
-  border: none;
-  background: $c-orange;
-  cursor: pointer;
-  color: $c-white;
-  transition: 0.3s;
-  font-size: 20px;
-
-  &:hover {
-    transform: scale(1.05);
-  }
 }
 
 @media (max-width: 1150px) {

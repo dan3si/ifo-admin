@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './RemoveEventsModule.module.scss';
 import API_URL from 'global/API';
+import { AuthContext } from 'global/AuthContext';
+import { withRouter } from 'react-router-dom';
 
-export const RemoveEvents = () => {
+export const RemoveEvents = withRouter(({ history }) => {
   const [events, setEvents] = useState([]);
   const getEvents = () => {
     fetch(`${API_URL}/events`)
@@ -10,7 +12,12 @@ export const RemoveEvents = () => {
       .then(data => setEvents(data));
   }
 
-  useEffect(getEvents, []);
+  const { authToken, checkAuth } = useContext(AuthContext);
+
+  useEffect(() => {
+    getEvents();
+    checkAuth(history);
+  }, []);
 
   return (
     <section className={styles.removeEvents} id="removeevents">
@@ -23,7 +30,24 @@ export const RemoveEvents = () => {
             <div className={styles.eventWrapper} key={id}>
               <button
                 className={styles.deleteEvent}
-                onClick={() => fetch(`${API_URL}/events/${id}`, { method: 'DELETE' }).then(() => getEvents())}
+                onClick={async () => {
+                  const response = await fetch(`${API_URL}/events/${id}`, {
+                    method: 'DELETE',
+                    body: authToken,
+                  });
+                  
+                  const data = await response.text();
+
+                  switch (data) {
+                    case 'invalid':
+                      checkAuth(history);
+                      break;
+                    
+                    case 'success':
+                      getEvents();
+                      break;
+                  }
+                }}
               />
 
               <div className={styles.imageWrapper}>
@@ -44,4 +68,4 @@ export const RemoveEvents = () => {
       </div>
     </section>
   );
-}
+});

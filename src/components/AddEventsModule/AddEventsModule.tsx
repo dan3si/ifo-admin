@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styles from './AddEventsModule.module.scss';
 import API_URL from 'global/API';
 import cn from 'classnames';
+import { withRouter } from 'react-router-dom';
+import { AuthContext } from 'global/AuthContext';
 
-export const AddEvents = () => {
+export const AddEvents = withRouter(({ history }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [file, setFile] = useState('');
   const [error, setError] = useState(false);
+
+  const { checkAuth } = useContext(AuthContext);
+
+  useEffect(() => {
+    checkAuth(history);
+  },
+  []
+  );
 
   return (
     <section className={styles.addEvents} id="addevents">
@@ -92,4 +102,4 @@ export const AddEvents = () => {
       </div>
     </section>
   )
-}
+});
