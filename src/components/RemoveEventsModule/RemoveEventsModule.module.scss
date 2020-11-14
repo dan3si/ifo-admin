@@ -28,7 +28,7 @@
   border-bottom: 1px solid $c-light-black;
 }
 
-.deleteEvent {
+.deleteEventButton {
   display: block;
   position: absolute;
   border: none;
@@ -88,6 +88,11 @@
   .eventWrapper {
     flex-direction: column;
     align-items: center;
+  }
+
+  .deleteEventButton {
+    position: static;
+    margin-bottom: 50px;
   }
 
   .imageWrapper {

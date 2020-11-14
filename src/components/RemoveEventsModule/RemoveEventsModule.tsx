@@ -29,7 +29,7 @@ export const RemoveEvents = withRouter(({ history }) => {
           ({ id, title, description }: { id: string, title: string, description: string }) => (
             <div className={styles.eventWrapper} key={id}>
               <button
-                className={styles.deleteEvent}
+                className={styles.deleteEventButton}
                 onClick={async () => {
                   const response = await fetch(`${API_URL}/events/${id}`, {
                     method: 'DELETE',
